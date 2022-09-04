@@ -14,6 +14,14 @@
     <div>{{message.split(' ').reverse().join(',')}}</div>
     <div>{{isOk ? 'I am okey': 'I am ill'}}</div>
     <div :id="`list-${listOrder}`">Red is Red!</div>
+    <hr>
+    <div v-if="seen">v-if='seen', if seen is truthy div can be seem otherwise(falsty) cant be seem</div>
+    <a v-bind:href="dynamicUrl"> v-bind:href='dynamicUrl'</a>
+    <a :href="dynamicUrl">Same as above but with shorthand syntax (:href='dynamicUrl') </a>
+    <hr>
+    <h2>dom events</h2>
+    <button v-on:click="count++"> v-on:click='count' = {{count}}</button>
+    <button @click="count--">shorthand syntax (@click='count--') {{count}}</button>
 
 </template>
 
@@ -33,6 +41,9 @@ export default  {
       message: 'I am Vue Developer!',
       isOk: true,
       listOrder:34,
+      seen:true,
+      dynamicUrl:'#',
+      count:0,
     }
   }
 };
