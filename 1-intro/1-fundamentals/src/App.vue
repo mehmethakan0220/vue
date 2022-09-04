@@ -10,6 +10,10 @@
     <button :disabled="disabledButton">button1</button>
     <button :disabled="enabledButton">button2</button>
     <button :disabled="defaultDisabled">button3</button>
+    <hr>
+    <div>{{message.split(' ').reverse().join(',')}}</div>
+    <div>{{isOk ? 'I am okey': 'I am ill'}}</div>
+    <div :id="`list-${listOrder}`">Red is Red!</div>
 
 </template>
 
@@ -26,6 +30,9 @@ export default  {
       disabledButton: true,
       enabledButton:  false,
       defaultDisabled: '', //in html disabled attribute without value equals disable the button
+      message: 'I am Vue Developer!',
+      isOk: true,
+      listOrder:34,
     }
   }
 };
@@ -39,7 +46,9 @@ export default  {
 
 
 <style>
-
+#list-34{
+  color: red;
+}
 
 
 </style>
