@@ -22,6 +22,14 @@
     <h2>dom events</h2>
     <button v-on:click="count++"> v-on:click='count' = {{count}}</button>
     <button @click="count--">shorthand syntax (@click='count--') {{count}}</button>
+    <hr>
+    <h2>modifiers</h2>
+    <form v-on:submit.prevent="onSubmit">
+    <input type="text" v-model="userName"><br>
+    <input type="password" v-model="userPass" ><br>
+    <input type="submit">
+      <img src="./assets/directives.png" alt="directives">
+    </form>
 
 </template>
 
@@ -44,6 +52,8 @@ export default  {
       seen:true,
       dynamicUrl:'#',
       count:0,
+      userName:"",
+      userPass:"",
     }
   }
 };
