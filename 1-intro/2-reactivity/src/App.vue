@@ -1,12 +1,21 @@
 <template>
   <button @click="inc">Click to increment</button>
   <button @click="dec">Click to decrement</button>
+  <button @click="reset">Click To Set Zero(0)</button>
   <div>result: {{count}}</div>
 
   <hr>
   <div>It is possible to add a new property directly to this without including it in data. However, properties added this way will not be able to trigger reactive updates.
     <hr>
     Vue uses a $ prefix when exposing its own built-in APIs via the component instance. It also reserves the prefix _ for internal properties. You should avoid using names for top-level data properties that start with either of these characters.
+  </div>
+  <hr>
+  <div>
+    Vue automatically binds the this value for methods so that it always refers to the component instance. This ensures that a method retains the correct this value if it's used as an event listener or callback. You should avoid using arrow functions when defining methods, as that prevents Vue from binding the appropriate this value
+  </div>
+
+  <div @click="setDivColor" :class="divColor">
+    Just like all other properties of the component instance, the methods are accessible from within the component's template. Inside a template they are most commonly used as event listeners: (Click this line)
   </div>
 </template>
 
@@ -16,6 +25,7 @@ export default{
   data(){
     return{
       count:null,
+      divColor:'',
     }
   },
   mounted(){
@@ -27,6 +37,13 @@ export default{
     },
     dec(){
       this.count--;
+    },
+    reset:()=>{
+      //arrow function cant use this
+      this.count  = 0;
+    },
+    setDivColor(){
+      this.divColor = 'divColor';
     }
   }
 }
@@ -35,6 +52,8 @@ export default{
 
 
 <style>
-
+.divColor{
+  color:red
+}
 
 </style>
