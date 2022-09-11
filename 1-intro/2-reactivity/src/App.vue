@@ -20,12 +20,26 @@
   <hr>
   <h2>Computed Property</h2>
   <br>
-  without computed( author.books.length > 0 ? "YES": "NO" ):
+  without computed= author.books.length > 0 ? "YES": "NO" :
 
   <div>Has Published Books: {{author.books.length > 0 ? "YES": "NO"}}</div>
   <hr>
-  with computed( isBookPublish ):
+  with computed= isBookPublish :
   <div>Has Published Books: {{isBookPublish}}</div>
+  <hr>
+  <h2>Computed Caching vs Methods</h2>
+  with method invocation= isBookPublishMethod() :
+  <div>Has Published Books: {{ isBookPublishMethod() }}</div><hr>
+  <div>Instead of a computed property, we can define the same function as a method. For the end result, the two approaches are indeed exactly the same. However, the difference is that computed properties are cached based on their reactive dependencies. A computed property will only re-evaluate when some of its reactive dependencies have changed. This means as long as author.books has not changed, multiple access to publishedBooksMessage will immediately return the previously computed result without having to run the getter function again.</div>
+  <hr>
+  <button @click="updateDateNow">Update state (timePropert) </button>
+  <div>Date.now() = {{now}}</div>
+  <hr>
+  <div>In comparison, a method invocation will always run the function whenever a re-render happens.
+    <br>
+    Why do we need caching? Imagine we have an expensive computed property list, which requires looping through a huge array and doing a lot of computations. Then we may have other computed properties that in turn depend on list. Without caching, we would be executing list’s getter many more times than necessary! In cases where you do not want caching, use a method call instead.
+  </div>
+
 </template>
 
 
@@ -43,6 +57,7 @@ export default{
           'Vue 4 - The Mystery'
         ]
       },
+      timeProperty:Date.now(),
     }
   },
   mounted(){
@@ -61,11 +76,21 @@ export default{
     },
     setDivColor(){
       this.divColor = 'divColor';
+    },
+    isBookPublishMethod(){
+      return this.author.books.length > 0 ? 'yes' : 'no';
+    },
+    updateDateNow(){
+      this.timeProperty = Date.now();
     }
   },
   computed:{
     isBookPublish(){
       return this.author.books.length > 0 ? "YES": "NO";
+    },
+    //The following computed property will never update, because Date.now() is not a reactive dependency:
+    now(){
+      return this.timeProperty;
     }
   }
 }
