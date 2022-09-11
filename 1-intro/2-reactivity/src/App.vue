@@ -39,6 +39,15 @@
     <br>
     Why do we need caching? Imagine we have an expensive computed property list, which requires looping through a huge array and doing a lot of computations. Then we may have other computed properties that in turn depend on list. Without caching, we would be executing list’s getter many more times than necessary! In cases where you do not want caching, use a method call instead.
   </div>
+  <br><hr>
+  <h2>Writable Computed</h2>
+  <div>
+    Computed properties are by default getter-only. If you attempt to assign a new value to a computed property, you will receive a runtime warning. In the rare cases where you need a "writable" computed property, you can create one by providing both a getter and a setter:
+    when you run this.fullName = 'John Doe', the setter will be invoked and this.firstName and this.lastName will be updated accordingly.
+  </div>
+  <hr>
+  <div>Fullname: {{fullName}}</div>
+  <input placeholder="set new full name" v-model="fnameLname" type="text"><button @click="setFullName">OK</button>
 
 </template>
 
@@ -58,6 +67,11 @@ export default{
         ]
       },
       timeProperty:Date.now(),
+      person:{
+        fname:"John",
+        lname:"Doe"
+      },
+      fnameLname:"",
     }
   },
   mounted(){
@@ -82,6 +96,10 @@ export default{
     },
     updateDateNow(){
       this.timeProperty = Date.now();
+    },
+    setFullName(){
+      //set full name over computed property setter
+      this.fullName = this.fnameLname;
     }
   },
   computed:{
@@ -91,6 +109,16 @@ export default{
     //The following computed property will never update, because Date.now() is not a reactive dependency:
     now(){
       return this.timeProperty;
+    },
+    fullName:{
+      //getter
+      get(){
+        return this.person.fname + " " + this.person.lname;
+      },
+      //setter
+      set(newValue){
+        [this.person.fname, this.person.lname] = newValue.split(" ");// destructin assignment
+      }
     }
   }
 }
