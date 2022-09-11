@@ -17,6 +17,15 @@
   <div @click="setDivColor" :class="divColor">
     Just like all other properties of the component instance, the methods are accessible from within the component's template. Inside a template they are most commonly used as event listeners: (Click this line)
   </div>
+  <hr>
+  <h2>Computed Property</h2>
+  <br>
+  without computed( author.books.length > 0 ? "YES": "NO" ):
+
+  <div>Has Published Books: {{author.books.length > 0 ? "YES": "NO"}}</div>
+  <hr>
+  with computed( isBookPublish ):
+  <div>Has Published Books: {{isBookPublish}}</div>
 </template>
 
 
@@ -26,6 +35,14 @@ export default{
     return{
       count:null,
       divColor:'',
+      author: {
+        name: 'John Doe',
+        books: [
+          'Vue 2 - Advanced Guide',
+          'Vue 3 - Basic Guide',
+          'Vue 4 - The Mystery'
+        ]
+      },
     }
   },
   mounted(){
@@ -44,6 +61,11 @@ export default{
     },
     setDivColor(){
       this.divColor = 'divColor';
+    }
+  },
+  computed:{
+    isBookPublish(){
+      return this.author.books.length > 0 ? "YES": "NO";
     }
   }
 }
