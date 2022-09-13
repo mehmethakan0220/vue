@@ -107,6 +107,16 @@
     <div :style="[styles, otherStyle]" > &ltdiv :style="[styles, otherStyle]" &gt&lt/div&gt </div>
     <br>
 
+    <hr>
+    <h3>Multiple Values</h3>
+    <br>
+    <div>You can provide an array of multiple (prefixed) values to a style property, for example:</div>
+
+    <div :style="{fontFamily:['Arial', 'Helvetica', 'sans-serif']}">
+      &ltdiv :class="{fontFamily:['Arial', 'Helvetica', 'sans-serif']}"&gt&lt/div&gt
+    </div>
+    <div>This will only render the last value in the array which the browser supports.</div>
+
 
   </div>
 </div>
@@ -138,7 +148,7 @@ export default{
       otherStyle:{
         textDecoration:'underline',
         lineHeight:'20px'
-      }
+      },
     }
   },
   computed:{
