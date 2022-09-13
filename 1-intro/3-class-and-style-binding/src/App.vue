@@ -61,6 +61,42 @@
     <br>
     <div :class="[arrayStyle.activeClass, arrayStyle.errorClass]">We can bind :class to an array to apply a list of classes: class="[arrayStyle.activeClass, arrayStyle.errorClass]"</div>
     <div>Which will render:  &ltdiv class="active text-danger"&gt&lt/div&gt</div><br>
+    
+    <hr>
+    <h2>Binding Inline Styles</h2>
+    <h3>Binding to Objects</h3>
+    <br>
+    <div>
+      :style supports binding to JavaScript object values - it corresponds to an HTML element's style property:
+      Although camelCase keys are recommended, :style also supports kebab-cased CSS property keys (corresponds to how they are used in actual CSS) - for example:
+    </div>
+    <hr>
+    <pre>
+      data() {
+        return {
+          activeColor: 'red',
+          fontSize: 30
+      }
+    }
+    </pre>
+    <div :style="{color:styles.color, fontSize:styles.fontSize}" >&ltdiv :style="{ color: activeColor, fontSize: fontSize + 'px' }"&gt&lt/div&gt</div>
+
+    <hr>
+    <div>It is often a good idea to bind to a style object directly so that the template is cleaner:</div>
+    <pre>
+      data() {
+        return {
+          styleObject: {
+            color: 'red',
+            fontSize: '13px'
+          }
+        }
+      }
+
+      &ltdiv :style="styleObject"&gt&lt/div>
+    </pre>
+    <div :style="styles" >&ltdiv :style="styles" &gt&lt/div&gt</div>
+    <div>Again, object style binding is often used in conjunction with computed properties that return objects.</div>
 
   </div>
 </div>
@@ -84,6 +120,10 @@ export default{
       arrayStyle:{
         activeClass:'active',
         errorClass:'text-danger'
+      },
+      styles:{
+        color:"magenta",
+        fontSize: '30px'
       }
     }
   },
