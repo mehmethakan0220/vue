@@ -98,6 +98,16 @@
     <div :style="styles" >&ltdiv :style="styles" &gt&lt/div&gt</div>
     <div>Again, object style binding is often used in conjunction with computed properties that return objects.</div>
 
+    <hr>
+
+    <h3>Binding Style Objects to Array(Merging Style Objects)</h3>
+
+    <div>We can bind :style to an array of multiple style objects. These objects will be merged and applied to the same element:</div>
+    <br>
+    <div :style="[styles, otherStyle]" > &ltdiv :style="[styles, otherStyle]" &gt&lt/div&gt </div>
+    <br>
+
+
   </div>
 </div>
 
@@ -124,6 +134,10 @@ export default{
       styles:{
         color:"magenta",
         fontSize: '30px'
+      },
+      otherStyle:{
+        textDecoration:'underline',
+        lineHeight:'20px'
       }
     }
   },
