@@ -18,14 +18,25 @@
   <div v-if="condition">Vue is Awesome</div>
   <div v-else>Ohh NNoo</div>
   <hr>
-
-
+  <h2>v-if on Template</h2>
+  <br>
+  <div>
+    Because v-if is a directive, it has to be attached to a single element. But what if we want to toggle more than one element? In this case we can use v-if on a "template" element, which serves as an <mark>invisible</mark> wrapper. The final rendered result will not include the "template" element.
+  </div>
+  <button @click="isOk = !isOk">click to hide all</button>
+  <template v-if="isOk">
+    <div>template for v-if depends on isOk's truthy values</div>
+  </template>
+  <template v-else>
+    <div>template for v-else depends on isOk's falsy values</div>
+  </template>
 </template>
 <script>
 export default{
   data(){
     return{
       condition:true,
+      isOk:false,
     }
   }
 }
