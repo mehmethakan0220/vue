@@ -56,6 +56,11 @@
     <hr>
     We can also bind to a computed property that returns an object. This is a common and powerful pattern:
     <div :class="computedClass" class="static">Hello world div <button @click="isActive = !isActive; hasError=!hasError">change activity status</button><br></div>
+    <hr>
+    <h3>Binding to arrays</h3>
+    <br>
+    <div :class="[arrayStyle.activeClass, arrayStyle.errorClass]">We can bind :class to an array to apply a list of classes: class="[arrayStyle.activeClass, arrayStyle.errorClass]"</div>
+    <div>Which will render:  &ltdiv class="active text-danger"&gt&lt/div&gt</div><br>
 
   </div>
 </div>
@@ -75,6 +80,10 @@ export default{
       classObject:{
         'active':true,
         'text-danger':true,
+      },
+      arrayStyle:{
+        activeClass:'active',
+        errorClass:'text-danger'
       }
     }
   },
