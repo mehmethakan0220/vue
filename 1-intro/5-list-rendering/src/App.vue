@@ -226,6 +226,41 @@
       <li v-if="item.id %2 != 0">{{item.id}}){{item.title}}</li>
     </template>
   </ul>
+  <hr>
+  <br>
+  <h2>Maintaining State with key</h2>
+  <br>
+  <div>When Vue is updating a list of elements rendered with v-for, by default it uses an "in-place patch" strategy. If the order of the data items has changed, instead of moving the DOM elements to match the order of the items, Vue will patch each element in-place and make sure it reflects what should be rendered at that particular index.
+
+  This default mode is efficient, but only suitable when your list render output does not rely on child component state or temporary DOM state (e.g. form input values).
+
+  To give Vue a hint so that it can track each node's identity, and thus reuse and reorder existing elements, you need to provide a unique key attribute for each item:
+  </div>
+  <pre>
+    &ltdiv v-for="item in items" :key="item.id"&gt
+      &lt!-- content --&gt
+    &lt/div&gt
+  </pre>
+  <hr>
+  <div>
+    When using &lttemplate v-for&gt, the key should be placed on the &lttemplate&gt container:
+  </div>
+  <pre>
+    &lttemplate v-for="todo in todos" :key="todo.name"&gt
+      &ltli&gt{ todo.name }&lt/li&gt
+    &lt/template&gt
+  </pre>
+
+  <div>
+    <mark>Note</mark> <br>
+    key here is a special attribute being bound with v-bind. It should not be confused with the property key variable when using v-for with an object.
+  </div>
+  <br>
+  <div>
+    It is recommended to provide a key attribute with v-for whenever possible, unless the iterated DOM content is simple (i.e. contains no components or stateful DOM elements), or you are intentionally relying on the default behavior for performance gains.
+
+    The key binding expects primitive values(strings, numbers and symbols). Do not use objects as v-for keys.
+  </div>
 
 
 
