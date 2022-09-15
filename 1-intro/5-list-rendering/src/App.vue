@@ -285,6 +285,19 @@
   <div>
     The reason for not automatically injecting item into the component is because that makes the component tightly coupled to how v-for works. Being explicit about where its data comes from makes the component reusable in other situations.
   </div>
+  <hr>
+  <br>
+  <h2>Replacing an Array</h2>
+  <br>
+  <div>
+    Mutation methods, as the name suggests, mutate the original array they are called on. In comparison, there are also non-mutating methods, e.g. filter(), concat() and slice(), which do not mutate the original array but always return a new array. When working with non-mutating methods, we should replace the old array with the new one:
+  </div>
+  <pre>
+    this.items = this.items.filter((item) => item.message.match(/Foo/))
+  </pre>
+  <div>
+    You might think this will cause Vue to throw away the existing DOM and re-render the entire list - luckily, that is not the case. Vue implements some smart heuristics to maximize DOM element reuse, so replacing an array with another array containing overlapping objects is a very efficient operation.
+  </div>
 
 
 
