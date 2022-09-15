@@ -18,7 +18,7 @@
       }
     }
     <hr>
-    &ltli v-for="item in items" :key="item.id" &gt {item.title} &lt/li&gt
+    &lt;li v-for="item in items" :key="item.id" &gt; {item.title} &lt;/li&gt;
    </pre>
   <ul>
     <li v-for="item in items" :key="item.id" > {{item.title}} </li>
@@ -39,9 +39,9 @@
       }
     }
     <hr>
-    &ltli v-for="(item, index) in items"&gt
+    &lt;li v-for="(item, index) in items"&gt;
       { parentMessage } - { index } - { item.message }
-    &lt/li&gt
+    &lt;/li&gt;
   </pre>
    <ul>
     <li v-for="(item, index) in items">{{parentMessage}} - {{index}} - {{item.title}}</li>
@@ -51,32 +51,32 @@
     Notice how the v-for value matches the function signature of the forEach callback. In fact, you can use destructuring on the v-for item alias similar to destructuring function arguments:
   </div>
   <pre>
-    &ltli v-for="{ message } in items"&gt
+    &lt;li v-for="{ message } in items"&gt;
       { message }
-    &lt/li&gt
+    &lt;/li&gt;
 
   <!-- with index alias -->
-    &ltli v-for="({ message }, index) in items"&gt
+    &lt;li v-for="({ message }, index) in items"&gt;
       { message } { index }
-    &lt/li&gt
+    &lt;/li&gt;
   </pre>
   <hr>
   <div>
     For nested v-for, scoping also works similar to nested functions. Each v-for scope has access to parent scopes:
   </div>
   <pre>
-    &ltli v-for="item in items"&gt
-      &ltspan v-for="childItem in item.children"&gt
+    &lt;li v-for="item in items"&gt;
+      &lt;span v-for="childItem in item.children"&gt;
         { item.message } { childItem }
-      &lt/span&gt
-    &lt/li&gt
+      &lt;/span&gt;
+    &lt;/li&gt;
   </pre>
   <hr>
   <div>
     You can also use of as the delimiter instead of in, so that it is closer to JavaScript's syntax for iterators:
   </div>
   <pre>
-    &ltdiv v-for="item of items"&gt {item} &lt/div&gt
+    &lt;div v-for="item of items"&gt; {item} &lt;/div&gt;
   </pre>
   <ul>
     <li v-for="item of items">{{item}}</li>
@@ -104,11 +104,11 @@
       }
     }
     <hr>
-    &ltul&gt
-      &ltli v-for="value in myObject"&gt
+    &lt;ul&gt;
+      &lt;li v-for="value in myObject"&gt;
         { value }
-      &lt/li&gt
-    &lt/ul&gt
+      &lt;/li&gt;
+    &lt;/ul&gt;
   </pre>
   <ul>
     <li v-for="value in myObject">{{value}}</li>
@@ -119,9 +119,9 @@
     You can also provide a second alias for the property's name (a.k.a. key):
   </div>
   <pre>
-    &ltli v-for="(value, key) in myObject"&gt
+    &lt;li v-for="(value, key) in myObject"&gt;
       { key }: { value }
-    &lt/li&gt
+    &lt;/li&gt;
   </pre>
   <ul>
     <li v-for="(value, key) in myObject">
@@ -134,9 +134,9 @@
     And another for the index:
   </div>
   <pre>
-    &ltli v-for="(value, key, index) in myObject"&gt
+    &lt;li v-for="(value, key, index) in myObject"&gt;
       { index }. { key }: { value }
-    &lt/li&gt
+    &lt;/li&gt;
   </pre>
   <ul>
     <li v-for="(value, key, index) in myObject">
@@ -152,22 +152,22 @@
     Note here n starts with an initial value of 1 instead of 0.
   </div>
   <pre>
-    &ltspan v-for="n in 10"&gt{ n }&lt/span>
+    &lt;span v-for="n in 10"&gt;{ n }&lt;/span>
   </pre>
   <hr>
   <br>
-  <h2>v-for on &lttemplate&gt</h2>
+  <h2>v-for on &lt;template&gt;</h2>
   <br>
   <div>
-    Similar to template v-if, you can also use a &lttemplate&gt tag with v-for to render a block of multiple elements. For example:
+    Similar to template v-if, you can also use a &lt;template&gt; tag with v-for to render a block of multiple elements. For example:
   </div>
   <pre>
-    &ltul&gt
-      &lttemplate v-for="item in items"&gt
-        &ltli&gt{ item.msg }&lt/li&gt
-        &ltli class="divider" role="presentation"&gt&lt/li&gt
-      &lt/template&gt
-    &lt/ul&gt
+    &lt;ul&gt;
+      &lt;template v-for="item in items"&gt;
+        &lt;li&gt;{ item.msg }&lt;/li&gt;
+        &lt;li class="divider" role="presentation"&gt;&lt;/li&gt;
+      &lt;/template&gt;
+    &lt;/ul&gt;
   </pre>
   <ul>
     <template v-for="item in items">
@@ -191,9 +191,9 @@
     This will throw an error because property "todo"
     is not defined on instance.
     -->
-    &ltli v-for="item in items" v-if="item.id %2 == 0"&gt
+    &lt;li v-for="item in items" v-if="item.id %2 == 0"&gt;
       { item.title }
-    &lt/li&gt
+    &lt;/li&gt;
   </pre>
   <code>
     <pre>
@@ -212,14 +212,14 @@
   </code>
   <hr>
   <div>
-    This can be fixed by moving v-for to a wrapping &lttemplate&gt tag (which is also more explicit):
+    This can be fixed by moving v-for to a wrapping &lt;template&gt; tag (which is also more explicit):
   </div>
   <pre>
-    &ltul&gt
-      &lttemplate v-for="item in items" :key="item.id"&gt
-        &ltli v-if="item.id %2 != 0"&gt{item.id}) {item.title} &lt/li&gt
-      &lt/template&gt
-    &lt/ul&gt
+    &lt;ul&gt;
+      &lt;template v-for="item in items" :key="item.id"&gt;
+        &lt;li v-if="item.id %2 != 0"&gt;{item.id}) {item.title} &lt;/li&gt;
+      &lt;/template&gt;
+    &lt;/ul&gt;
   </pre>
   <ul>
     <template v-for="item in items" :key="item.id">
@@ -237,18 +237,18 @@
   To give Vue a hint so that it can track each node's identity, and thus reuse and reorder existing elements, you need to provide a unique key attribute for each item:
   </div>
   <pre>
-    &ltdiv v-for="item in items" :key="item.id"&gt
-      &lt!-- content --&gt
-    &lt/div&gt
+    &lt;div v-for="item in items" :key="item.id"&gt;
+      &lt;!-- content --&gt;
+    &lt;/div&gt;
   </pre>
   <hr>
   <div>
-    When using &lttemplate v-for&gt, the key should be placed on the &lttemplate&gt container:
+    When using &lt;template v-for&gt;, the key should be placed on the &lt;template&gt; container:
   </div>
   <pre>
-    &lttemplate v-for="todo in todos" :key="todo.name"&gt
-      &ltli&gt{ todo.name }&lt/li&gt
-    &lt/template&gt
+    &lt;template v-for="todo in todos" :key="todo.name"&gt;
+      &lt;li&gt;{ todo.name }&lt;/li&gt;
+    &lt;/template&gt;
   </pre>
 
   <div>
@@ -260,6 +260,30 @@
     It is recommended to provide a key attribute with v-for whenever possible, unless the iterated DOM content is simple (i.e. contains no components or stateful DOM elements), or you are intentionally relying on the default behavior for performance gains.
 
     The key binding expects primitive values(strings, numbers and symbols). Do not use objects as v-for keys.
+  </div>
+  <hr>
+  <br>
+  <h2>v-for with a Component</h2>
+  <br>
+  <div>
+    You can directly use v-for on a component, like any normal element (don't forget to provide a key):
+  </div>
+  <pre>
+    &lt;MyComponent v-for="item in items" :key="item.id" /&gt;
+  </pre>
+  <hr>
+  <div>However, this won't automatically pass any data to the component, because components have isolated scopes of their own. In order to pass the iterated data into the component, we should also use props:</div>
+
+  <pre>
+    &lt;MyComponent
+      v-for="(item, index) in items"
+      :item="item"
+      :index="index"
+      :key="item.id"
+    /&gt;
+  </pre>
+  <div>
+    The reason for not automatically injecting item into the component is because that makes the component tightly coupled to how v-for works. Being explicit about where its data comes from makes the component reusable in other situations.
   </div>
 
 
