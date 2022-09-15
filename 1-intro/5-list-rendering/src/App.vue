@@ -298,6 +298,56 @@
   <div>
     You might think this will cause Vue to throw away the existing DOM and re-render the entire list - luckily, that is not the case. Vue implements some smart heuristics to maximize DOM element reuse, so replacing an array with another array containing overlapping objects is a very efficient operation.
   </div>
+  <hr>
+  <br>
+  <h2>Displaying Filtered/Sorted Results</h2>
+  <br>
+  <div>
+    Sometimes we want to display a filtered or sorted version of an array without actually mutating or resetting the original data. In this case, you can create a computed property that returns the filtered or sorted array.
+
+    For example:
+  </div>
+  <pre>
+    data() {
+      return {
+        numbers: [1, 2, 3, 4, 5]
+      }
+    },
+    computed: {
+      evenNumbers() {
+        return this.numbers.filter(n => n % 2 === 0)
+      }
+    }
+
+    &lt;li v-for="n in evenNumbers"&gt;{ n }&lt;/li&gt;
+  </pre>
+  <hr>
+  <div>
+    In situations where computed properties are not feasible (e.g. inside nested v-for loops), you can use a method:
+  </div>
+  <pre>
+    data() {
+      return {
+        sets: [[ 1, 2, 3, 4, 5 ], [6, 7, 8, 9, 10]]
+      }
+    },
+    methods: {
+      even(numbers) {
+        return numbers.filter(number => number % 2 === 0)
+      }
+    }
+    
+    &lt;ul v-for="numbers in sets"&gt;
+      &lt;li v-for="n in even(numbers)"&gt;{ n }&lt;/li&gt;
+    &lt;/ul&gt;
+  </pre>
+  <div>
+    Be careful with reverse() and sort() in a computed property! These two methods will mutate the original array, which should be avoided in computed getters. Create a copy of the original array before calling these methods:
+  </div>
+  <pre>
+    - return numbers.reverse()
+    + return [...numbers].reverse()
+  </pre>
 
 
 
