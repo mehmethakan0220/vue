@@ -175,6 +175,57 @@
       <li :style="{listStyle:'none'}">------------------------------------</li>
     </template>
   </ul>
+  <hr>
+  <br>
+  <h2>v-for with v-if</h2>
+  <br>
+  <div>
+    <mark>Note</mark><br>
+    It's not recommended to use v-if and v-for on the same element due to implicit precedence. Refer to style guide for details.
+  </div>
+  <div>
+    When they exist on the same node, v-if has a higher priority than v-for. That means the v-if condition will not have access to variables from the scope of the v-for:
+  </div>
+  <pre>
+    <!--
+    This will throw an error because property "todo"
+    is not defined on instance.
+    -->
+    &ltli v-for="item in items" v-if="item.id %2 == 0"&gt
+      { item.title }
+    &lt/li&gt
+  </pre>
+  <code>
+    <pre>
+      App.vue:199 Uncaught TypeError: Cannot read properties of undefined (reading 'id')
+    at Proxy._sfc_render (App.vue:199:42)
+    at renderComponentRoot (runtime-core.esm-bundler.js:890:44)
+    at ReactiveEffect.componentUpdateFn [as fn] (runtime-core.esm-bundler.js:5602:57)
+    at ReactiveEffect.run (reactivity.esm-bundler.js:185:25)
+    at instance.update (runtime-core.esm-bundler.js:5716:56)
+    at setupRenderEffect (runtime-core.esm-bundler.js:5730:9)
+    at mountComponent (runtime-core.esm-bundler.js:5512:9)
+    at processComponent (runtime-core.esm-bundler.js:5470:17)
+    at patch (runtime-core.esm-bundler.js:5060:21)
+    at render2 (runtime-core.esm-bundler.js:6231:13)
+    </pre>
+  </code>
+  <hr>
+  <div>
+    This can be fixed by moving v-for to a wrapping &lttemplate&gt tag (which is also more explicit):
+  </div>
+  <pre>
+    &ltul&gt
+      &lttemplate v-for="item in items" :key="item.id"&gt
+        &ltli v-if="item.id %2 != 0"&gt{item.id}) {item.title} &lt/li&gt
+      &lt/template&gt
+    &lt/ul&gt
+  </pre>
+  <ul>
+    <template v-for="item in items" :key="item.id">
+      <li v-if="item.id %2 != 0">{{item.id}}){{item.title}}</li>
+    </template>
+  </ul>
 
 
 
